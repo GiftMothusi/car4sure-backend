@@ -23,4 +23,7 @@ app = "car4sure-backend"
 
   [[mounts]]
   source = "storage"
-  destination = "/var/www/html/storage"
+  destination = "/var/www/html/storage/app/public"
+
+  [deploy]
+  release_command = "ln -sf /var/www/html/storage/app/public /var/www/html/public/storage"
