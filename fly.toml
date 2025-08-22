@@ -22,4 +22,4 @@ app = "car4sure-backend"
   destination = "/var/www/html/storage/app/public"
 
 [deploy]
-  release_command = "php artisan storage:link"
+  release_command = "chown -R www-data:www-data /var/www/html/storage/app/public && chmod -R 755 /var/www/html/storage/app/public && php artisan storage:link"
