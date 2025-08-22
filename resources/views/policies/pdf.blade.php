@@ -214,8 +214,8 @@
                     @foreach($vehicle['coverages'] as $coverage)
                     <tr>
                         <td>{{ $coverage['type'] }}</td>
-                        <td>${{ number_format($coverage['limit']) }}</td>
-                        <td>${{ number_format($coverage['deductible']) }}</td>
+                        <td>R{{ number_format($coverage['limit']) }}</td>
+                        <td>R{{ number_format($coverage['deductible']) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
