@@ -15,7 +15,7 @@ class PolicyController extends Controller
     public function __construct(
         private PolicyPdfService $policyPdfService
     ) {
-        // Remove the middleware call - it's handled in routes
+        
     }
 
     public function index(Request $request): JsonResponse

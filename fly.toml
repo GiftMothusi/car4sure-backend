@@ -20,3 +20,7 @@ app = "car4sure-backend"
 [[statics]]
   guest_path = "/var/www/html/public"
   url_prefix = "/"
+
+  [[mounts]]
+  source = "storage"
+  destination = "/var/www/html/storage"
