@@ -1,0 +1,28 @@
+app = "car4sure-backend"
+primary_region = "jnb" # Johannesburg region
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 80
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[env]
+  APP_ENV = "production"
+  LOG_CHANNEL = "stderr"
+  LOG_LEVEL = "info"
+  LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+  APP_URL = "https://car4sure-backend.fly.dev"
+  ASSET_URL = "https://car4sure-backend.fly.dev"
+
+[deploy]
+  release_command = "php /var/www/html/artisan migrate --force"
+
+[[statics]]
+  guest_path = "/var/www/html/public"
+  url_prefix = "/"
