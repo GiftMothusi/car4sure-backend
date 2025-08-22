@@ -17,13 +17,9 @@ app = "car4sure-backend"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
 
-[[statics]]
-  guest_path = "/var/www/html/public"
-  url_prefix = "/"
-
-  [[mounts]]
+[[mounts]]
   source = "storage"
   destination = "/var/www/html/storage/app/public"
 
-  [deploy]
-  release_command = "ln -sf /var/www/html/storage/app/public /var/www/html/public/storage"
+[deploy]
+  release_command = "php artisan storage:link"
