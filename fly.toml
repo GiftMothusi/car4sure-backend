@@ -23,4 +23,4 @@ app = "car4sure-backend"
 
 
 [deploy]
-  release_command = "mkdir -p /var/www/html/storage/app/persistent/policies && chown -R www-data:www-data /var/www/html/storage/app/persistent && chmod -R 755 /var/www/html/storage/app/persistent && ln -sf /var/www/html/storage/app/persistent /var/www/html/public/storage"
+  release_command = "sh -c 'mkdir -p /var/www/html/storage/app/persistent/policies && chown -R www-data:www-data /var/www/html/storage/app/persistent && chmod -R 755 /var/www/html/storage/app/persistent && ln -sf /var/www/html/storage/app/persistent /var/www/html/public/storage'"
