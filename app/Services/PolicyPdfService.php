@@ -17,19 +17,6 @@ class PolicyPdfService
 
         $pdf = Pdf::loadView('policies.pdf', $data);
         
-        $filename = 'policies/policy-' . $policy->policy_no . '.pdf';
-        
-        if (app()->environment('production')) {
-            $fullPath = '/var/www/html/storage/app/persistent/' . $filename;
-            if (!file_exists(dirname($fullPath))) {
-                mkdir(dirname($fullPath), 0755, true);
-            }
-            file_put_contents($fullPath, $pdf->output());
-        } else {
-            Storage::disk('public')->put($filename, $pdf->output());
-        }
-
-        
-        return $filename;
+        return $pdf->output();
     }
 }

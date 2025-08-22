@@ -8,6 +8,7 @@ use App\Http\Resources\PolicyResource;
 use App\Models\Policy;
 use App\Services\PolicyPdfService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class PolicyController extends Controller
@@ -124,19 +125,22 @@ class PolicyController extends Controller
         }
     }
 
-    public function generatePdf(Policy $policy): JsonResponse
+    public function generatePdf(Policy $policy): Response
     {
         if ($policy->user_id !== auth()->id()) {
             return response()->json(['message' => 'Forbidden'], 403);
         }
-
+    
         try {
-            $pdfPath = $this->policyPdfService->generatePolicyPdf($policy);
-
-            return response()->json([
-                'message' => 'PDF generated successfully',
-                'download_url' => url("storage/{$pdfPath}")
-            ]);
+            $pdfContent = $this->policyPdfService->generatePolicyPdf($policy);
+            
+            $filename = 'policy-' . $policy->policy_no . '.pdf';
+            
+            return response($pdfContent)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="' . $filename . '"')
+                ->header('Content-Length', strlen($pdfContent));
+                
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Failed to generate PDF',
